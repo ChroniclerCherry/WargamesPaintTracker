@@ -1,0 +1,30 @@
+#:kivy 1.0
+#:import kivy kivy
+
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        size_hint: 1,0.2
+        Label:
+            text: "search options here later"
+    ScrollView:
+        do_scroll_x: False
+        GridLayout:
+            id: grid
+            size_hint_y: None
+            height: self.minimum_height
+            cols: 3
+            row_default_height: 100
+
+<ColoursBox>
+    orientation: 'vertical'
+    padding: 5
+    canvas:
+        Color:
+            rgb: self.colour
+    Label:
+        id: name
+    Label:
+        id: company
+    Label:
+        id: colour
