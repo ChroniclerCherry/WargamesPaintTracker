@@ -1,22 +1,24 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 import csv
-from kivy.properties import ReferenceListProperty
+from kivy.properties import ListProperty
 
 
 class ColoursBox(BoxLayout):
+    colour = ListProperty([0,0,0])
+
     def __init__(self,name,company,colour,owned):
         BoxLayout.__init__(self)
         self.ids.name.text = name
         self.ids.company.text = company
+        self.colour = self.hex_to_rgb(colour)
 
-        self.colour = ReferenceListProperty(self.hex_to_rgb(colour))
 
 
     def hex_to_rgb(self,value):
         value = value.lstrip('#')
         lv = len(value)
-        return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
+        return list(int(value[i:i + lv // 3], 16)/255 for i in range(0, lv, lv // 3))
 
 
 class PaintTrackerApp(App):
