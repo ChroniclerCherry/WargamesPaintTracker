@@ -4,10 +4,15 @@
 BoxLayout:
     orientation: 'vertical'
     BoxLayout:
-        size_hint: 1,0.2
-        Label:
-            text: "search options here later"
+        size_hint: 1,None
+        height: 40
+        TextInput:
+            text: "Search option to come"
+        Button:
+            text: "SAVE"
+            on_press: app.save_data()
     ScrollView:
+        padding: 10
         do_scroll_x: False
         GridLayout:
             id: grid
@@ -17,7 +22,6 @@ BoxLayout:
             row_default_height: 100
 
 <ColoursBox>
-
     canvas.before:
         Color:
             rgb: root.colour
@@ -26,7 +30,7 @@ BoxLayout:
             size: self.size
     BoxLayout:
         orientation: 'vertical'
-        size_hint: 0.5,0.5
+        size_hint: 1,0.7
         canvas.before:
             Color:
                 rgb: 0,0,0
@@ -37,5 +41,17 @@ BoxLayout:
             id: name
         Label:
             id: company
+        BoxLayout:
+            ToggleButton:
+                id: owned
+                group: self.parent
+                text: "Owned"
+                on_press: app.update_ownership("Y",root.index,owned)
+            ToggleButton:
+                id: unowned
+                group:self.parent
+                text:"Unowned"
+                on_press: app.update_ownership("N",root.index,unowned)
         Label:
-            id: colour
+            size_hint_y: None
+            height: 10
